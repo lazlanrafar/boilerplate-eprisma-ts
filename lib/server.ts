@@ -7,6 +7,7 @@ import prisma from "@/lib/prisma";
 import path from "path";
 import { InternalServerError } from "@/utils/api-response";
 import { redisClient } from "./redis";
+import { ErrorHandler } from "@/middlewares/error-handler";
 
 class App {
   public express: Application;
@@ -15,7 +16,9 @@ class App {
     this.express = express();
 
     this.middlewares();
+    this.disableSettings();
     this.routes();
+    this.errorHandler();
 
     this.connectPrisma().catch((e) => {
       throw e;
@@ -36,6 +39,10 @@ class App {
       .use(express.static("public"));
   }
 
+  private disableSettings(): void {
+    this.express.disable("x-powered-by");
+  }
+
   private routes(): void {
     const apiVersion = process.env.API_VERSION || "v1";
     const preRoute = `/${apiVersion}`;
@@ -48,6 +55,10 @@ class App {
         return InternalServerError({ res, data: err });
       }
     });
+  }
+
+  private errorHandler(): void {
+    this.express.use(ErrorHandler);
   }
 
   // ===============================================================================

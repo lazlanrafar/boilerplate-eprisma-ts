@@ -5,6 +5,8 @@ export const ENV = {
   API_VERSION: process.env.API_VERSION || "",
   API_PORT: process.env.API_PORT || "",
 
+  LOG_DIR: "./logs",
+
   JWT_SECRET: process.env.JWT_SECRET || "",
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || "",
 };
