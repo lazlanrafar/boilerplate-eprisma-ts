@@ -6,6 +6,7 @@ import routes from "@/routes";
 import prisma from "@/lib/prisma";
 import path from "path";
 import { InternalServerError } from "@/utils/api-response";
+import { redisClient } from "./redis";
 
 class App {
   public express: Application;
@@ -15,6 +16,14 @@ class App {
 
     this.middlewares();
     this.routes();
+
+    this.connectPrisma().catch((e) => {
+      throw e;
+    });
+
+    this.connectRedis().catch((e) => {
+      throw e;
+    });
   }
 
   private middlewares(): void {
@@ -41,12 +50,28 @@ class App {
     });
   }
 
+  // ===============================================================================
+  // PRISMA
+  // ===============================================================================
+
   public async connectPrisma(): Promise<void> {
     await prisma.$connect();
   }
 
   public async disconnectPrisma(): Promise<void> {
     await prisma.$disconnect();
+  }
+
+  // ===============================================================================
+  // REDIS
+  // ===============================================================================
+
+  public async connectRedis(): Promise<void> {
+    await redisClient.connect();
+  }
+
+  public async disconnectRedis(): Promise<void> {
+    await redisClient.disconnect();
   }
 }
 
