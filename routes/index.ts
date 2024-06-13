@@ -1,10 +1,8 @@
-import { Application, Request, Response } from "express";
+import { Router } from "express";
+const routes = Router();
 
-export default function Routes(app: Application) {
-  const apiVersion = process.env.API_VERSION || "v1";
-  const preRoute = `/${apiVersion}`;
+routes.get("/", (req, res) => {
+  res.json({ message: "Hello World" });
+});
 
-  app.use(`${preRoute}/`, (req: Request, res: Response) => {
-    res.send("Hello World");
-  });
-}
+export default routes;

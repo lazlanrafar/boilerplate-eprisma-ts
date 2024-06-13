@@ -1,9 +1,11 @@
-import express, { Application } from "express";
+import express, { Application, Response, Request } from "express";
 import cors from "cors";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
 import routes from "@/routes";
 import prisma from "@/lib/prisma";
+import path from "path";
+import { InternalServerError } from "@/utils/api-response";
 
 class App {
   public express: Application;
@@ -26,7 +28,17 @@ class App {
   }
 
   private routes(): void {
-    routes(this.express);
+    const apiVersion = process.env.API_VERSION || "v1";
+    const preRoute = `/${apiVersion}`;
+
+    this.express.use(`${preRoute}/`, routes);
+    this.express.get("/", (req: Request, res: Response) => {
+      try {
+        res.sendFile(path.join(__dirname, "@/public/home.html"));
+      } catch (err) {
+        return InternalServerError({ res, data: err });
+      }
+    });
   }
 
   public async connectPrisma(): Promise<void> {
