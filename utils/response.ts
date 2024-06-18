@@ -13,13 +13,13 @@ const GetSignedUrl = async (key: string) => {
 const HandleResponseData = (params: { [key: string]: any }) => {
   if (!params) return params;
 
-  let data = { ...params };
+  const data = { ...params };
 
   for (const key of Object.keys(params)) {
     if (KEY_OBJECT_LIST.includes(key) && params[key]) {
-      if (typeof params[key] === "string") continue;
-      if (typeof params[key] === undefined) continue;
-      if (typeof params[key] === null) continue;
+      if (typeof params[key] == "string") continue;
+      if (params[key] == undefined) continue;
+      if (params[key] == null) continue;
 
       data[key] = HandleResponseData(params[key]);
     }
