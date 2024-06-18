@@ -1,5 +1,9 @@
 import { Response } from "express";
+import { ENV } from "@/constants";
 import { ResponseData } from "./response";
+import { AESEncrypt } from "./encryption";
+
+const isEncrypt = ENV.IS_STAGING || ENV.IS_PRODUCTION;
 
 export const Ok = ({
   res,
@@ -18,6 +22,9 @@ export const Ok = ({
     ...(meta && { meta: meta }),
     data: ResponseData(data),
   };
+
+  if (isEncrypt) response.data = AESEncrypt(response.data);
+
   res.status(response.status).json(response);
 };
 
@@ -35,6 +42,9 @@ export const Created = ({
     message: message ?? "Created",
     data: ResponseData(data),
   };
+
+  if (isEncrypt) (response as any).data = AESEncrypt(response.data);
+
   res.status(response.status).json(response);
 };
 
