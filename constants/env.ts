@@ -5,7 +5,7 @@ export const ENV = {
   API_VERSION: process.env.API_VERSION || "",
   API_PORT: process.env.API_PORT || "",
 
-  LOG_DIR: "./logs",
+  LOG_DIR: process.env.LOG_DIR || "./logs",
 
   ENCRYPTION_KEY: process.env.ENCRYPTION_KEY || "",
 

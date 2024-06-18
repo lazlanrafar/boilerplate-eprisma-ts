@@ -15,9 +15,12 @@ datasource db {
 
 model tbm_user {
   id         String   @id @default(cuid())
-  email      String   @unique
+  username   String?  @unique
+  email      String?  @unique
   name       String
   password   String
+  is_active  Boolean  @default(true)
+  is_deleted Boolean  @default(false)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }

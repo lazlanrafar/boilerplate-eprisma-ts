@@ -112,7 +112,7 @@ export const InternalServerError = ({
 }: {
   res: Response;
   data?: any;
-  message?: string;
+  message?: string | any;
 }) => {
   const response = {
     status: 500,
