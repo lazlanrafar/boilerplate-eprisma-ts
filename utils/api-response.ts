@@ -48,6 +48,20 @@ export const Created = ({
   res.status(response.status).json(response);
 };
 
+export const Download = ({
+  res,
+  path,
+  filename,
+}: {
+  res: Response;
+  path: any;
+  filename: string;
+}) => {
+  res.setHeader("Content-Type", "application/octet-stream");
+  res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
+  res.status(200).download(path);
+};
+
 export const BadRequest = ({
   res,
   data,
