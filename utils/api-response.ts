@@ -1,4 +1,5 @@
 import { Response } from "express";
+import { ResponseData } from "./response";
 
 export const Ok = ({
   res,
@@ -14,7 +15,7 @@ export const Ok = ({
   const response = {
     status: 200,
     message: message ?? "Successfully",
-    data: data,
+    data: ResponseData(data),
     ...(pagination && { pagination: pagination }),
   };
   res.status(response.status).json(response);
@@ -32,7 +33,7 @@ export const Created = ({
   const response = {
     status: 201,
     message: message ?? "Created",
-    data: data,
+    data: ResponseData(data),
   };
   res.status(response.status).json(response);
 };
