@@ -33,6 +33,24 @@ export const logger: Logger = createLogger({
   transports: logTransports.concat(fileTransports),
 });
 
-export const log = (logEntry: LogEntry) => {
+export const logWithoutConsole = (logEntry: LogEntry) => {
+  const consoleTransport = logger.transports.find(
+    (transport) => transport instanceof transports.Console
+  );
+  const fileTransport = logger.transports.find(
+    (transport) => transport instanceof transports.File
+  );
+
+  if (!fileTransport) {
+    fileTransports.forEach((transport) => logger.add(transport));
+  }
+
+  if (!consoleTransport) {
+    logger.log(logEntry);
+    return;
+  }
+
+  logger.remove(consoleTransport);
   logger.log(logEntry);
+  logger.add(consoleTransport);
 };
