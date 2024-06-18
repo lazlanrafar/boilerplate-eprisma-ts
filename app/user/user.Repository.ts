@@ -1,5 +1,13 @@
 import prisma from "@/lib/prisma";
 
+export const FetchUser = async () => {
+  return await prisma.tbm_user.findMany({
+    where: {
+      is_deleted: false,
+    },
+  });
+};
+
 export const FetchUserById = async (id: string) => {
   return await prisma.tbm_user.findUnique({
     where: {

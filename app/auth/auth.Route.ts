@@ -5,9 +5,9 @@ import {
 } from "./auth.Middleware";
 import { Login, Register } from "./auth.Controller";
 
-const authRoute = Router();
+const AuthRoute = Router();
 
-authRoute.post("/login", LoginSchemaMiddleware, Login);
-authRoute.post("/register", RegisterSchemaMiddleware, Register);
+AuthRoute.post("/login", LoginSchemaMiddleware, Login);
+AuthRoute.post("/register", RegisterSchemaMiddleware, Register);
 
-export default authRoute;
+export default AuthRoute;
