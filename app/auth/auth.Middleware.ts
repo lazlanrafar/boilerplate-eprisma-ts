@@ -1,9 +1,12 @@
 import { BadRequest, InternalServerError } from "@/utils/api-response";
 import { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
-import { LoginSchema } from "./auth.Schema";
-import { FetchUserByUsernameOREmail } from "../user/user.Repository";
-import { VerifyPassword } from "@/utils/hash-password";
+import { LoginSchema, RegisterSchema } from "./auth.Schema";
+import {
+  FetchUserByEmail,
+  FetchUserByUsernameOREmail,
+} from "../user/user.Repository";
+import { EncryptPassword, VerifyPassword } from "@/utils/hash-password";
 
 export const LoginSchemaMiddleware = async (
   req: Request,
@@ -33,6 +36,34 @@ export const LoginSchemaMiddleware = async (
     }
 
     req.body.user = user;
+    next();
+  } catch (error) {
+    if (error instanceof ZodError)
+      return BadRequest({ res, data: error, message: error.errors[0].message });
+
+    return InternalServerError({ res });
+  }
+};
+
+export const RegisterSchemaMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const validate = RegisterSchema.parse(req.body);
+
+    const checkEmail = await FetchUserByEmail(validate.email);
+    if (checkEmail)
+      return BadRequest({ res, message: "Email already registered" });
+
+    const checkUsername = await FetchUserByUsernameOREmail(validate.username);
+    if (checkUsername)
+      return BadRequest({ res, message: "Username already registered" });
+
+    validate.password = await EncryptPassword(validate.password);
+
+    req.body = validate;
     next();
   } catch (error) {
     if (error instanceof ZodError)
