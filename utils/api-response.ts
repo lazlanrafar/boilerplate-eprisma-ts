@@ -4,19 +4,19 @@ import { ResponseData } from "./response";
 export const Ok = ({
   res,
   data,
-  pagination,
+  meta,
   message,
 }: {
   res: Response;
   data?: any;
-  pagination?: any;
+  meta?: any;
   message?: string;
 }) => {
   const response = {
     status: 200,
     message: message ?? "Successfully",
+    ...(meta && { meta: meta }),
     data: ResponseData(data),
-    ...(pagination && { pagination: pagination }),
   };
   res.status(response.status).json(response);
 };

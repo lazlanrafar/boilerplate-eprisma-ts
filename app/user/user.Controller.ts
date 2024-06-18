@@ -4,10 +4,18 @@ import { FetchUser, FetchUserById } from "./user.Repository";
 
 export const GetUser = async (req: Request, res: Response) => {
   try {
-    const users = await FetchUser();
+    const { page, page_size, search } = req.query;
 
-    return await Ok({ res, data: users });
+    const result = await FetchUser({
+      page: page ? +page : undefined,
+      page_size: page_size ? +page_size : undefined,
+
+      search: search ? (search as string) : undefined,
+    });
+
+    return await Ok({ res, data: result.data, meta: result.meta });
   } catch (error) {
+    console.log(error);
     return InternalServerError({ res, data: error });
   }
 };
