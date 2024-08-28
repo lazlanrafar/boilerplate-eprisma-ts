@@ -9,10 +9,7 @@
     "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
     "skipLibCheck": true, // Skip type checking of declaration files
     "moduleResolution": "node", // Specify module resolution strategy: 'node' for Node.js
-    "resolveJsonModule": true, // Include modules imported with .json extension
-    "paths": {
-      "@/*": ["./*"] // Base URL and paths for module resolution
-    }
+    "resolveJsonModule": true // Include modules imported with .json extension
   },
   "include": ["**/*"], // Include all files in the project
   "exclude": ["node_modules", "dist"] // Exclude node_modules and dist directories

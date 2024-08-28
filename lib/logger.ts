@@ -1,4 +1,4 @@
-import { ENV } from "@/constants";
+import { ENV } from "../constants";
 import { existsSync, mkdirSync } from "fs";
 import {
   createLogger,

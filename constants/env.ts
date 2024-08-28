@@ -1,4 +1,4 @@
-import { Environments } from "@/enums";
+import { Environments } from "../enums";
 
 export const ENV = {
   IS_DEVELOPMENT: process.env.NODE_ENV === Environments.DEVELOPMENT,

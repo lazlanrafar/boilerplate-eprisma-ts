@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { InternalServerError, Ok } from "@/utils/api-response";
+import { InternalServerError, Ok } from "../../utils/api-response";
 import { FetchUser, FetchUserById } from "./user.Repository";
 
 export const GetUser = async (req: Request, res: Response) => {

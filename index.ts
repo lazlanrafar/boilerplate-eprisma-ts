@@ -1,6 +1,6 @@
-import App from "@/lib/server";
+import App from "./lib/server";
 import { config as configDotenv } from "dotenv";
-import { printAppInfo } from "@/utils/print-app-info";
+import { printAppInfo } from "./utils/print-app-info";
 
 configDotenv();
 

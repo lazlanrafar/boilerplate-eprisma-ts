@@ -1,5 +1,5 @@
-import { InternalServerError, Ok } from "@/utils/api-response";
-import { EncryptToken } from "@/utils/jwt";
+import { InternalServerError, Ok } from "../../utils/api-response";
+import { EncryptToken } from "../../utils/jwt";
 import { Request, Response } from "express";
 import { StoreUser } from "../user/user.Repository";
 

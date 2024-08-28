@@ -2,12 +2,12 @@ import express, { Application, Response, Request } from "express";
 import cors from "cors";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
-import routes from "@/routes";
-import prisma from "@/lib/prisma";
+import routes from "../routes";
+import prisma from "../lib/prisma";
 import path from "path";
-import { InternalServerError } from "@/utils/api-response";
+import { InternalServerError } from "../utils/api-response";
 import { redisClient } from "./redis";
-import { ErrorHandler } from "@/middlewares/error-handler";
+import { ErrorHandler } from "../middlewares/error-handler";
 
 class App {
   public express: Application;
@@ -20,13 +20,13 @@ class App {
     this.routes();
     this.errorHandler();
 
-    this.connectPrisma().catch((e) => {
-      throw e;
-    });
+    // this.connectPrisma().catch((e) => {
+    //   throw e;
+    // });
 
-    this.connectRedis().catch((e) => {
-      throw e;
-    });
+    // this.connectRedis().catch((e) => {
+    //   throw e;
+    // });
   }
 
   private middlewares(): void {
@@ -50,7 +50,7 @@ class App {
     this.express.use(`${preRoute}/`, routes);
     this.express.get("/", (req: Request, res: Response) => {
       try {
-        res.sendFile(path.join(__dirname, "@/public/home.html"));
+        res.sendFile(path.join(__dirname, "/public/home.html"));
       } catch (err) {
         return InternalServerError({ res, data: err });
       }

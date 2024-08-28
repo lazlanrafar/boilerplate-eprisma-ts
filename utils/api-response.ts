@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { ENV } from "@/constants";
+import { ENV } from "../constants";
 import { ResponseData } from "./response";
 import { AESEncrypt } from "./encryption";
 

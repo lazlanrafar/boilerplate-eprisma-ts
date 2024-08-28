@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ENV } from "@/constants";
+import { ENV } from "../constants";
 
 export const EncryptToken = (payload: any) => {
   return jwt.sign(payload, ENV.JWT_SECRET);

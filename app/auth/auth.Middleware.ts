@@ -1,4 +1,4 @@
-import { BadRequest, InternalServerError } from "@/utils/api-response";
+import { BadRequest, InternalServerError } from "../../utils/api-response";
 import { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
 import { LoginSchema, RegisterSchema } from "./auth.Schema";
@@ -6,7 +6,7 @@ import {
   FetchUserByEmail,
   FetchUserByUsernameOREmail,
 } from "../user/user.Repository";
-import { EncryptPassword, VerifyPassword } from "@/utils/hash-password";
+import { EncryptPassword, VerifyPassword } from "../../utils/hash-password";
 
 export const LoginSchemaMiddleware = async (
   req: Request,

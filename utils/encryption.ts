@@ -1,4 +1,4 @@
-import { ENV } from "@/constants";
+import { ENV } from "../constants";
 import CryptoJS from "crypto-js";
 
 const keyPromise = CryptoJS.enc.Utf8.parse(ENV.ENCRYPTION_KEY);

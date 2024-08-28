@@ -1,4 +1,4 @@
-import { logger } from "@/lib/logger";
+import { logger } from "../lib/logger";
 import { Request, Response, NextFunction } from "express";
 import { inspect } from "util";
 

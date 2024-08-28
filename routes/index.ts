@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { Router } from "express";
-import { VerifyAuthToken } from "@/middlewares/auth";
-import { Ok } from "@/utils/api-response";
+import { VerifyAuthToken } from "../middlewares/auth";
+import { Ok } from "../utils/api-response";
 
-import AuthRoute from "@/app/auth/auth.Route";
-import UserRoute from "@/app/user/user.Route";
+import AuthRoute from "../app/auth/auth.Route";
+import UserRoute from "../app/user/user.Route";
 
 const routes = Router();
 

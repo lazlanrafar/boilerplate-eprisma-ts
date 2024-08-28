@@ -1,7 +1,7 @@
-import { FetchUserById } from "@/app/user/user.Repository";
-import { logWithoutConsole } from "@/lib/logger";
-import { Unauthorized } from "@/utils/api-response";
-import { DecryptToken } from "@/utils/jwt";
+import { FetchUserById } from "../app/user/user.Repository";
+import { logWithoutConsole } from "../lib/logger";
+import { Unauthorized } from "../utils/api-response";
+import { DecryptToken } from "../utils/jwt";
 import { tbm_user } from "@prisma/client";
 import { Request, Response, NextFunction } from "express";
 
