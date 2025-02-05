@@ -16,13 +16,14 @@
     "prisma:pull": "npx prisma db pull && npx prisma generate",
     "prisma:seed": "npx prisma db seed",
     "prisma:studio": "npx prisma studio",
+    "prisma:reset": "npx prisma migrate reset --force",
     "studio": "npx prisma studio"
   },
   "author": "L Azlan Rafar",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "5.15.0",
-    "argon2": "^0.40.3",
+    "bcryptjs": "^2.4.3",
     "chalk": "4.1.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -36,6 +37,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.6",
     "@types/cors": "^2.8.16",
     "@types/crypto-js": "^4.2.2",

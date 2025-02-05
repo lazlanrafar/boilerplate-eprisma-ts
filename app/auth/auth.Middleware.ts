@@ -6,7 +6,7 @@ import {
   FetchUserByEmail,
   FetchUserByUsernameOREmail,
 } from "../user/user.Repository";
-import { EncryptPassword, VerifyPassword } from "../../utils/hash-password";
+import { EncryptPassword, VerifyPassword } from "../../utils/bcrypt";
 
 export const LoginSchemaMiddleware = async (
   req: Request,

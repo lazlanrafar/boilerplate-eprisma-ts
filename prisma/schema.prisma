@@ -13,13 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model tbm_auth {
+  id        String  @id @default(cuid())
+  username  String? @unique
+  email     String  @unique
+  password  String
+  is_active Boolean @default(true)
+
+  is_deleted Boolean  @default(false)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user tbm_user?
+}
+
 model tbm_user {
-  id         String   @id @default(cuid())
-  username   String?  @unique
-  email      String?  @unique
-  name       String
-  password   String
-  is_active  Boolean  @default(true)
+  id         String  @id @default(cuid())
+  email      String  @unique
+  first_name String?
+  last_name  String?
+
+  auth tbm_auth? @relation(fields: [email], references: [email])
+
   is_deleted Boolean  @default(false)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
